@@ -20,9 +20,6 @@ export default function WelcomeScreen() {
 				</Muted>
 				<Button
 					onPress={() => {
-						console.log(axios.defaults.headers.common.Authorization);
-						console.log(axios.defaults.baseURL);
-
 						axios
 							.get("/users/me/")
 							.then(({ data }) => console.log("RESPONSE", data))

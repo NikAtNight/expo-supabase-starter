@@ -1,10 +1,10 @@
+import axios from "axios";
 import { useRouter } from "expo-router";
 import { View } from "react-native";
 
 import { Button } from "@/components/ui/button";
 import { Text } from "@/components/ui/text";
 import { H1, Muted } from "@/components/ui/typography";
-import axios from "axios";
 
 export default function TabOneScreen() {
 	const router = useRouter();
@@ -27,9 +27,6 @@ export default function TabOneScreen() {
 			</Button>
 			<Button
 				onPress={() => {
-					console.log(axios.defaults.headers.common.Authorization);
-					console.log(axios.defaults.baseURL);
-
 					axios
 						.get("/users/me/")
 						.then(({ data }) => console.log("RESPONSE", data))
