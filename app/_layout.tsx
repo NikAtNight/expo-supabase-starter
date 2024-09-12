@@ -3,6 +3,7 @@ import "axiosConfig";
 
 import { Stack } from "expo-router";
 import { SafeAreaProvider } from "react-native-safe-area-context";
+import { QueryClient, QueryClientProvider } from "react-query";
 
 import { SupabaseProvider } from "@/context/supabase-provider";
 
@@ -11,25 +12,29 @@ export {
 	ErrorBoundary,
 } from "expo-router";
 
+const queryClient = new QueryClient();
+
 export default function RootLayout() {
 	return (
-		<SupabaseProvider>
-			<SafeAreaProvider>
-				<Stack
-					screenOptions={{
-						headerShown: false,
-					}}
-				>
-					<Stack.Screen name="(protected)" />
-					<Stack.Screen name="(public)" />
-					<Stack.Screen
-						name="modal"
-						options={{
-							presentation: "modal",
+		<QueryClientProvider client={queryClient}>
+			<SupabaseProvider>
+				<SafeAreaProvider>
+					<Stack
+						screenOptions={{
+							headerShown: false,
 						}}
-					/>
-				</Stack>
-			</SafeAreaProvider>
-		</SupabaseProvider>
+					>
+						<Stack.Screen name="(protected)" />
+						<Stack.Screen name="(public)" />
+						<Stack.Screen
+							name="modal"
+							options={{
+								presentation: "modal",
+							}}
+						/>
+					</Stack>
+				</SafeAreaProvider>
+			</SupabaseProvider>
+		</QueryClientProvider>
 	);
 }

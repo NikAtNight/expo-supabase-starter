@@ -1,13 +1,14 @@
-import axios from "axios";
 import { useRouter } from "expo-router";
 import { View } from "react-native";
 
+import { useGetUser } from "@/actions/userHooks";
 import { Button } from "@/components/ui/button";
 import { Text } from "@/components/ui/text";
 import { H1, Muted } from "@/components/ui/typography";
 
 export default function TabOneScreen() {
 	const router = useRouter();
+	const { data, isLoading } = useGetUser();
 
 	return (
 		<View className="flex-1 items-center justify-center bg-background p-4 gap-y-4">
@@ -25,16 +26,7 @@ export default function TabOneScreen() {
 			>
 				<Text>Open Modal</Text>
 			</Button>
-			<Button
-				onPress={() => {
-					axios
-						.get("/users/me/")
-						.then(({ data }) => console.log("RESPONSE", data))
-						.catch((err) => console.log(err));
-				}}
-			>
-				<Text>Test Request</Text>
-			</Button>
+			<Text>{isLoading ? "Loading..." : data?.email}</Text>
 		</View>
 	);
 }
