@@ -26,7 +26,18 @@ export default function WelcomeScreen() {
 							.catch((err) => console.log(err));
 					}}
 				>
-					<Text>Test Request</Text>
+					<Text>Auth Request</Text>
+				</Button>
+
+				<Button
+					onPress={() => {
+						axios
+							.get("/users/test/")
+							.then(({ data }) => console.log("RESPONSE", data))
+							.catch((err) => console.log(err));
+					}}
+				>
+					<Text>No Auth Request</Text>
 				</Button>
 			</View>
 			<View className="flex flex-row gap-x-4">
